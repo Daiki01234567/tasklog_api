@@ -1,0 +1,24 @@
+# Django
+*.sqlite3
+*.sqlite3-journal
+/staticfiles/
+/media/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Env / Secrets
+.env
+venv/
+*.pem
+
+# IDE
+.vscode/
+.idea/
+
+# Coverage / Build
+htmlcov/
+dist/
+build/
