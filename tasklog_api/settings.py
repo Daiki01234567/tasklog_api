@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'tasks',
     'worklogs',
     
+    'drf_yasg',
     'rest_framework',
     'django_filters',
 ]

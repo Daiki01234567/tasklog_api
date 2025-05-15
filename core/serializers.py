@@ -23,7 +23,11 @@ class FileUploadSerializer(serializers.Serializer):
         value.seek(0)
         allowed_mimes = {
             '.csv': ['text/csv', 'application/csv', 'text/plain'],
-            '.xlsx': ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']
+            '.xlsx': [
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'application/zip',
+                'application/octet-stream',
+            ],
         }
         if mime not in allowed_mimes[ext]:
             raise serializers.ValidationError(f'MIMEタイプが不正です: {mime}')
