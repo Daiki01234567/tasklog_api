@@ -6,7 +6,7 @@
 
 ```bash
 # 依存追加
-pip install -r requirements.txt          # drf-yasg を含む
+pip install -r requirements.txt
 
 # Swagger 導入済みなので設定不要、起動後に /swagger/ へアクセス
 python manage.py migrate
