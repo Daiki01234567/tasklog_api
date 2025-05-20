@@ -20,7 +20,6 @@ class MyUserManager(BaseUserManager):
         user.role = 'PM'
         user.is_superuser = True
         user.is_staff = True
-        user.save(using=self._db)
         return user
 
 
@@ -49,8 +48,3 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-    
-    def save(self, *args, **kwargs):
-        if self.password and not self.password.startswith('pbkdf2'):
-            self.set_password(self.password)
-        super().save(*args, **kwargs)
