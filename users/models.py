@@ -3,9 +3,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
-        if not email:
-            raise ValueError('メールアドレスは必須です')
-        
         user = self.model(
             email=self.normalize_email(email),
             **extra_fields

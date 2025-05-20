@@ -13,4 +13,3 @@ class UserSerializer(BaseUserSerializer):
         password = validated_data.pop('password')
         user = User.objects.create_user(password=password, **validated_data)
         return user
-        
