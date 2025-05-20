@@ -2,7 +2,6 @@ from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models.deletion import ProtectedError
 
 from .models import Project
@@ -20,8 +19,6 @@ class ProjectViewSet(ImportMixin, ModelViewSet):
     model_serializer_class  = ProjectSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [BaseRolePermission]
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['name']
     
     def destroy(self, request, *args, **kwargs):
         obj = self.get_object()
