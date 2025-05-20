@@ -12,21 +12,31 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+from django.core.exceptions import ImproperlyConfigured
+from environ import Env
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+env = Env()
+VENV_DIR = Path(sys.prefix)
+env.read_env(VENV_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(1hy#m9e#v8kww&g8+dsxn105%7o4sehdqh!y$-#_@_#4-$+iq'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', True)
 
-ALLOWED_HOSTS = []
+if DEBUG:
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = env('SECRET_KEY', default='django-insecure-(1hy#m9e#v8kww&g8+dsxn105%7o4sehdqh!y$-#_@_#4-$+iq')
+else:
+    SECRET_KEY = env('SECRET_KEY')
+    if not SECRET_KEY:
+        raise ImproperlyConfigured('DJANGO_SECRET_KEY が設定されていません')
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 
 # Application definition
@@ -179,12 +189,16 @@ DJOSER = {
 }
 
 # ローカル確認用メール
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
 
-# 本番環境用メール
-# EMAIL_HOST = ''
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = ''
-# EMAIL_HOST_PASSWORD = ''
-# EMAIL_USE_TLS = True
-# DEFAULT_FROM_EMAIL = ''
+# 本番環境用メール　SMTP サーバー情報
+EMAIL_HOST = env('EMAIL_HOST', default='')
+EMAIL_PORT = env.int('EMAIL_PORT', 587)
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', True)
+
+# 送信元アドレス
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='')
+
+# SMTP 認証
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
