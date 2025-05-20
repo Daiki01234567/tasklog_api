@@ -23,13 +23,13 @@ python manage.py runserver
 
 1. **アクセストークンを取得**  
 - POST `/api/auth/jwt/create/` エンドポイントを開く  
-- スーパーユーザーのメールアドレスとパスワードを入力してExecuteをクリック  
+- スーパーユーザーのメールアドレスとパスワードを入力してExecuteをクリック
 - レスポンスの `access` をコピー
 
 2. **Swagger UI にトークンをセット**  
-   - 画面右上の **Authorize** ボタンをクリック  
-   - accessキーを貼り付ける
+- 画面右上の **Authorize** ボタンをクリック  
+- accessキーを貼り付ける
 
 3. **各エンドポイントを “Try it out”**  
-   - 認証済み状態になっているので、あとは任意のAPIを開いて  
-   - Try it out → パラメータを入力 → Executeで動作確認できます  
+- 認証済み状態になっているので、あとは任意のAPIを開いて  
+- Try it out → パラメータを入力 → Executeで動作確認できます  
