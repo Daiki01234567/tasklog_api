@@ -1,7 +1,7 @@
 from users.models import User
 from core.permissions import BaseRolePermission
 
-class IsWorkLogRoleBasedPermission(BaseRolePermission):
+class IsWorkLogRolePermission(BaseRolePermission):
     role_actions = {
         User.Role.DEV: ['list', 'retrieve', 'daily', 'partial_update', 'create'],
         User.Role.ACC: ['list', 'retrieve', 'export', 'daily']
@@ -14,8 +14,10 @@ class IsWorkLogRoleBasedPermission(BaseRolePermission):
 
         if request.user.role == User.Role.PM:
             return True
-        if request.user.role == User.Role.DEV:
+        elif request.user.role == User.Role.DEV:
             if obj.user == request.user:
                 return view.action in self.role_actions[User.Role.DEV]
+        elif request.user.role == User.Role.ACC:
+            return view.action in self.role_actions[User.Role.ACC]
 
         return False

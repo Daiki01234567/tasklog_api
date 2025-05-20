@@ -1,10 +1,10 @@
 from users.models import User
 from core.permissions import BaseRolePermission
 
-class IsTaskRoleBasedPermission(BaseRolePermission):
+class IsTaskRolePermission(BaseRolePermission):
     role_actions = {
         User.Role.DEV: ['list', 'retrieve', 'partial_update', 'create'],
-        User.Role.ACC: []
+        User.Role.ACC: ['list', 'retrieve'],
     }
 
     def has_object_permission(self, request, view, obj):
@@ -16,4 +16,5 @@ class IsTaskRoleBasedPermission(BaseRolePermission):
             return True
         if request.user.role == User.Role.DEV:
             return obj.assignee == request.user and view.action in allowed
+        
         return False

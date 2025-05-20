@@ -8,7 +8,7 @@ class BaseRolePermission(BasePermission):
     role_actions = {
         User.Role.PM:  ['list', 'retrieve', 'create', 'update', 'partial_update', 'destroy'],
         User.Role.DEV: ['list', 'retrieve'],
-        User.Role.ACC: []
+        User.Role.ACC: ['list', 'retrieve'],
     }
     
     def has_permission(self, request, view):

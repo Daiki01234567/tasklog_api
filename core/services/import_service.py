@@ -8,11 +8,10 @@ from django.core.exceptions import FieldError
 
 from projects.models import Project
 from tasks.models import Task
-from worklogs.models import WorkLog
 from projects.serializers import ProjectSerializer
 from tasks.serializers import TaskSerializer
 from worklogs.serializers import WorkLogSerializer
-from core.serializers import FileUploadSerializer
+from core.serializers.file_upload import FileUploadSerializer
 from core.utils import load_book, parse_int_or_none, normalize_df, require_columns
 
 from pandas import DataFrame

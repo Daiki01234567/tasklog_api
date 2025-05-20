@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -8,16 +8,16 @@ from django.db.models import Sum
 
 from .models import WorkLog
 from .serializers import WorkLogSerializer
-from .permissions import IsWorkLogRoleBasedPermission
+from .permissions import IsWorkLogRolePermission
 from core.filter import WorkLogFilter
 from core.services.export_service import generate_worklog_csv, build_filename
 from core.services.import_service import ImportMixin
 
-class WorkLogViewSet(ImportMixin, ModelViewSet):
+class WorkLogViewSet(ImportMixin, ReadOnlyModelViewSet):
     queryset = WorkLog.objects.select_related('task__project', 'user').all()
     serializer_class = WorkLogSerializer
     model_serializer_class  = WorkLogSerializer
-    permission_classes = [IsWorkLogRoleBasedPermission]
+    permission_classes = [IsWorkLogRolePermission]
     filter_backends = [DjangoFilterBackend]
     filterset_class = WorkLogFilter
 

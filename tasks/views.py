@@ -5,14 +5,14 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Task
 from .serializers import TaskSerializer
-from .permissions import IsTaskRoleBasedPermission
+from .permissions import IsTaskRolePermission
 from core.services.import_service import ImportMixin
 
 class TaskViewSet(ImportMixin, ModelViewSet):
     queryset = Task.objects.select_related('project', 'assignee').all()
     serializer_class = TaskSerializer
     model_serializer_class = TaskSerializer
-    permission_classes = [IsTaskRoleBasedPermission]
+    permission_classes = [IsTaskRolePermission]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['status', 'assignee__email', 'project__name']
     
