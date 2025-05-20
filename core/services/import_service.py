@@ -4,6 +4,7 @@ from rest_framework.serializers import Serializer
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
+from rest_framework.parsers import MultiPartParser, FormParser
 from django.core.exceptions import FieldError
 
 from projects.models import Project
@@ -131,10 +132,12 @@ class ImportMixin:
     file_serializer_class = FileUploadSerializer
     model_serializer_class = None
     
-    @action(detail=False,
-            methods=['get', 'post'],
-            url_path='import',
-            serializer_class=FileUploadSerializer
+    @action(
+        detail=False,
+        methods=['post'],
+        url_path='import',
+        serializer_class=FileUploadSerializer,
+        parser_classes=[MultiPartParser, FormParser],
     )
     def import_file(self, request):
         if request.method == 'GET':

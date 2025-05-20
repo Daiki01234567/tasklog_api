@@ -164,6 +164,7 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'タスク＆工数管理 API ドキュメント',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,
 }
 
 SIMPLE_JWT = {
