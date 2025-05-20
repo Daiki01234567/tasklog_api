@@ -1,0 +1,5 @@
+﻿email,password,role
+pm@example.com,Password123,PM
+dev1@example.com,Password123,DEV
+dev2@example.com,Password123,DEV
+acc1@example.com,Password123,ACC

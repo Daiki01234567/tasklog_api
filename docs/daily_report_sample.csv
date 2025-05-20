@@ -1,0 +1,6 @@
+﻿work_date,email,spent_hours,project_name,title
+2025-04-29,dev1@example.com,4,Project Alpha,API 設計
+2025-04-01,dev1@example.com,6,Project Beta,バグ修正
+2025-04-01,dev1@example.com,6,Project Alpha,API 設計
+2025-04-02,dev2@example.com,4,Project Alpha,モデル実装
+2025-04-03,dev2@example.com,2,Project Beta,バグ修正
