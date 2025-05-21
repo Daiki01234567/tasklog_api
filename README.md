@@ -20,7 +20,7 @@ python manage.py runserver
 ```
 
 ## Swagger での認証手順
-[http://127.0.0.1:8000/api/schema/swagger-ui/](http://127.0.0.1:8000/api/schema/swagger-ui/)
+[http://localhost:8000/api/schema/swagger-ui/](http://localhost:8000/api/schema/swagger-ui/)
 
 1. **アクセストークンを取得**  
 - POST `/auth/jwt/create/` エンドポイントを開く  
