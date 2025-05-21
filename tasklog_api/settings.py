@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_spectacular',
-    'rest_framework_simplejwt',
     'rest_framework.authtoken',
     'djoser',
 ]
@@ -159,6 +158,7 @@ REST_FRAMEWORK = {
     ],
 }
 
+# swagger
 SPECTACULAR_SETTINGS = {
     'TITLE': 'TaskLog API',
     'DESCRIPTION': 'タスク＆工数管理 API ドキュメント',
@@ -167,6 +167,7 @@ SPECTACULAR_SETTINGS = {
     'COMPONENT_SPLIT_REQUEST': True,
 }
 
+# simple_jwt
 SIMPLE_JWT = {
     # ヘッダーで受け付けるプレフィックス
     'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),
@@ -175,7 +176,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=3),
 }
 
-
+# djoser
 DJOSER = {
     # アカウント本登録メール
     'SEND_ACTIVATION_EMAIL': True,
@@ -187,6 +188,14 @@ DJOSER = {
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
     # アカウント本登録用URL
     'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SERIALIZERS': {
+        'user_create': 'users.serializers.UserSerializer',
+        'user': 'core.serializers.user.BaseUserSerializer',
+    },
+    'PERMISSIONS': {
+        'user': ['core.permissions.BaseRolePermission'],
+        'user_delete': ['core.permissions.BaseRolePermission'],
+    },
 }
 
 # ローカル確認用メール
