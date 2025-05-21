@@ -7,9 +7,9 @@ class MyUserManager(BaseUserManager):
             email=self.normalize_email(email),
             **extra_fields
         )
+        user.role = 'ACC'
         user.set_password(password)
         user.save(using=self._db)
-        
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
@@ -17,6 +17,7 @@ class MyUserManager(BaseUserManager):
         user.role = 'PM'
         user.is_superuser = True
         user.is_staff = True
+        user.save(using=self._db)
         return user
 
 
@@ -35,7 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = MyUserManager()
     
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['role']
+    REQUIRED_FIELDS = []
     
     class Meta:
         verbose_name = verbose_name_plural = 'ユーザー'
