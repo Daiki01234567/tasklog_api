@@ -42,18 +42,22 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-## Swagger での認証手順
+## APIドキュメント・Swagger での認証手順
+
+API仕様はSwagger UIで確認できます:  
 [http://localhost:8000/api/schema/swagger-ui/](http://localhost:8000/api/schema/swagger-ui/)
 
-1. **アクセストークンを取得**  
-- POST `/auth/jwt/create/` エンドポイントを開く  
-- スーパーユーザーのメールアドレスとパスワードを入力してExecuteをクリック
-- レスポンスの `access` をコピー
+1. **アクセストークンの取得**
+    - `POST /auth/jwt/create/` エンドポイントを開く
+    - スーパーユーザーのメールアドレスとパスワードを入力し Execute
+    - レスポンスの`access`をコピー
 
-2. **Swagger UI にトークンをセット**  
-- 画面右上の **Authorize** ボタンをクリック  
-- accessキーを貼り付ける
+2. **Swagger UI へトークンセット**
+    - 画面右上のAuthorizeボタンをクリック
+    - 取得したaccessトークンを貼り付けて認証
 
-3. **各エンドポイントを “Try it out”**  
-- 認証済み状態になっているので、あとは任意のAPIを開いて  
-- Try it out → パラメータを入力 → Executeで動作確認できます  
+3. **各エンドポイントの利用**
+    - “Try it out” でリクエスト実行
+    - パラメータを入力し、Executeで動作確認
+
+サンプルのExcel／CSVファイルは `docs/`フォルダ内にあります。
