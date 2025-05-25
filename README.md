@@ -44,12 +44,12 @@ python manage.py runserver
 
 ## APIドキュメント・Swagger での認証手順
 
-API仕様はSwagger UIで確認できます:  
+API仕様はSwagger UIで確認できます。
 [http://localhost:8000/api/schema/swagger-ui/](http://localhost:8000/api/schema/swagger-ui/)
 
 1. **アクセストークンの取得**
     - `POST /auth/jwt/create/` エンドポイントを開く
-    - スーパーユーザーのメールアドレスとパスワードを入力し Execute
+    - スーパーユーザーのメールアドレスとパスワードを入力しExecute
     - レスポンスの`access`をコピー
 
 2. **Swagger UI へトークンセット**
